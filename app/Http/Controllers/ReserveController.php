@@ -67,4 +67,14 @@ class ReserveController extends Controller
             'message' => 'Successfully made reserve!'
         ], 201);
     }
+
+    public function getAllUsersReserve($provider_id){
+
+        $users = DB::table('users')
+            ->join('reserves', 'reserves.user_id', 'users.id')
+            ->where('reserves.provider_id', $provider_id)
+            ->select('users.name', 'users.email', 'reserves.time', 'reserves.date')
+            ->get();
+        return $users;
+    }
 }
