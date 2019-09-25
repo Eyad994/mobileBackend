@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Reserve;
-use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -36,8 +35,8 @@ class ReserveController extends Controller
         $arr['provider'] = json_decode($join2);*/
 
 
-          /*$arr = json_decode($join);
-            return $arr[0]->id;*/
+        /*$arr = json_decode($join);
+          return $arr[0]->id;*/
 
         /*$user = User::where('id', $id)->get();
         return $user;*/
@@ -46,5 +45,26 @@ class ReserveController extends Controller
         return $reserves;*/
 
 
+    }
+
+    public function reserve(Request $request){
+
+        $request->validate([
+            'time' => 'required',
+            'date' => 'required',
+            'provider_id' => 'required',
+            'user_id' => 'required'
+        ]);
+
+        Reserve::create([
+           'time' => $request->time,
+           'date' => $request->date,
+           'provider_id' => $request->provider_id,
+           'user_id' => $request->user_id
+        ]);
+
+        return response()->json([
+            'message' => 'Successfully made reserve!'
+        ], 201);
     }
 }

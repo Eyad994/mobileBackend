@@ -31,7 +31,7 @@ class AuthController extends Controller
             'email' => $request->email,
             'password' => bcrypt($request->password),
             'is_provider' => $request->is_provider,
-            'provider_id' => $request->provider_id,
+            'place_id' => $request->place_id,
         ]);
         $user->save();
         return response()->json([
@@ -97,18 +97,6 @@ class AuthController extends Controller
     public function user(Request $request)
     {
         return response()->json($request->user());
-        /*$user = $request->user();
-        $arr = json_decode($user, true);
-
-        if ($arr['provider_id'] == 1) {
-            $x =6;
-            $join = DB::table('users')
-                ->join('providers', 'users.provider_id', 'providers.id')
-                /*->where('users.id', $x)
-                ->select('users.id', 'users.name', 'users.email', 'providers.latitude', 'providers.longitude')
-                ->get();
-            return $join;
-        } else return $user;*/
     }
 }
 

@@ -19,3 +19,5 @@ Route::group([
 Route::get('getProviders', 'ProviderController@getAllProviders');
 
 Route::get('getReserves/{id}', 'ReserveController@getAllReserves');
+
+Route::post('reserve', 'ReserveController@reserve');
